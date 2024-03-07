@@ -1,3 +1,3 @@
 # Text-Analysis-Online-Media
 
-Using Python, this project will cover the core concepts required for working with text corpora: acquiring data from the web, string manipulation, regular expressions, and the use of programming libraries for text-analysis techniques. 
+An analysis using Python’s NLTK and Textacy libraries of core computational linguistic concepts: retrieving information from the web; processing text; examining corpora quantitatively through TF-IDF, PCA, LDA
