@@ -1,0 +1,42 @@
+jupyter nbconvert --to html .\analysis.ipynb --template .\custom.tpl  --output index.html
+
+
+
+-=-=-==-=-=--=-=-=-=
+.yml
+
+name: Convert Jupyter Notebook to HTML
+
+on:
+  push:
+    paths:
+      - '*.ipynb'  # Trigger the workflow only when a .ipynb file is pushed
+
+jobs:
+  convert_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Choose your desired Python version
+        
+      - name: Install dependencies
+        run: |
+          pip install nbconvert
+
+      - name: Convert Notebooks to HTML
+        run: |
+          jupyter nbconvert --to html *.ipynb
+          mv *.html docs/  # Move the HTML files to the docs directory
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto-convert Jupyter Notebook to HTML"
+          git push
